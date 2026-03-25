@@ -10,40 +10,64 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
-      - run: pip install PySide6 Pillow pyinstaller
-      - run: pyinstaller PregledacKamera.spec
-      - uses: actions/upload-artifact@v4
+      - name: Install dependencies
+        run: |
+          cd src
+          pip install PySide6 Pillow pyinstaller
+      - name: Build with PyInstaller
+        run: |
+          cd src
+          pyinstaller PregledacKamera.spec
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         with:
           name: CameraApp-Windows
-          path: dist/PregledacKamera.exe
+          path: src/dist/PregledacKamera.exe
 
   build-linux:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
-      - run: pip install PySide6 Pillow pyinstaller
-      - run: pyinstaller PregledacKamera.spec
-      - uses: actions/upload-artifact@v4
+      - name: Install dependencies
+        run: |
+          cd src
+          pip install PySide6 Pillow pyinstaller
+      - name: Build with PyInstaller
+        run: |
+          cd src
+          pyinstaller PregledacKamera.spec
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         with:
           name: CameraApp-Linux
-          path: dist/PregledacKamera
+          path: src/dist/PregledacKamera
 
   build-macos:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
-      - run: pip install PySide6 Pillow pyinstaller
-      - run: pyinstaller PregledacKamera.spec
-      - uses: actions/upload-artifact@v4
+      - name: Install dependencies
+        run: |
+          cd src
+          pip install PySide6 Pillow pyinstaller
+      - name: Build with PyInstaller
+        run: |
+          cd src
+          pyinstaller PregledacKamera.spec
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         with:
           name: CameraApp-macOS
-          path: dist/PregledacKamera
+          path: src/dist/PregledacKamera

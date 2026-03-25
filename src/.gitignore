@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.py[co]
+
+# Virtuelno okruženje
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# PyInstaller
+build/
+dist/
+*.spec     # ako ne želiš da čuvaš .spec fajl, ali ti imaš prilagođen PregledacKamera.spec pa ga IZBRISI ovu liniju ili zakomentariši
+# PregledacKamera.spec   # ostavi komentarisano ako želiš da čuvaš svoj spec fajl
+
+# Logovi i privremeni fajlovi
+*.log
+*.db-journal
+
+# Slike koje korisnik dodaje (ne želimo da ih čuvamo u repozitorijumu)
+images/*
+!images/.gitkeep
+
+# Bazu želimo da čuvamo? Ako da, ne ignoriši je
+# database/*.db   # ako želimo da ignorišemo bazu, otkomentariši; ovako je ne ignorišemo
+
+# Ostali fajlovi specifični za OS
+.DS_Store
+Thumbs.db

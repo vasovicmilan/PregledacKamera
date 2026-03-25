@@ -1,0 +1,49 @@
+name: Build Executables
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: pip install PySide6 Pillow pyinstaller
+      - run: pyinstaller PregledacKamera.spec
+      - uses: actions/upload-artifact@v4
+        with:
+          name: CameraApp-Windows
+          path: dist/PregledacKamera.exe
+
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: pip install PySide6 Pillow pyinstaller
+      - run: pyinstaller PregledacKamera.spec
+      - uses: actions/upload-artifact@v4
+        with:
+          name: CameraApp-Linux
+          path: dist/PregledacKamera
+
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: pip install PySide6 Pillow pyinstaller
+      - run: pyinstaller PregledacKamera.spec
+      - uses: actions/upload-artifact@v4
+        with:
+          name: CameraApp-macOS
+          path: dist/PregledacKamera

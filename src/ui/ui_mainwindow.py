@@ -132,30 +132,35 @@ class Ui_MainWindow(object):
         self.identificationGridLayout.setObjectName(u"identificationGridLayout")
         self.cameraTypeLabel = QLabel(self.identificationTab)
         self.cameraTypeLabel.setObjectName(u"cameraTypeLabel")
+        self.cameraTypeLabel.setFrameShape(QFrame.Box)
         self.cameraTypeLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
         self.identificationGridLayout.addWidget(self.cameraTypeLabel, 1, 1, 1, 1)
 
         self.cameraLocationLabel = QLabel(self.identificationTab)
         self.cameraLocationLabel.setObjectName(u"cameraLocationLabel")
+        self.cameraLocationLabel.setFrameShape(QFrame.Box)
         self.cameraLocationLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
         self.identificationGridLayout.addWidget(self.cameraLocationLabel, 1, 0, 1, 1)
 
         self.cameraPurposeLabel = QLabel(self.identificationTab)
         self.cameraPurposeLabel.setObjectName(u"cameraPurposeLabel")
+        self.cameraPurposeLabel.setFrameShape(QFrame.Box)
         self.cameraPurposeLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
         self.identificationGridLayout.addWidget(self.cameraPurposeLabel, 2, 0, 1, 1)
 
         self.cameraFunctioLabel = QLabel(self.identificationTab)
         self.cameraFunctioLabel.setObjectName(u"cameraFunctioLabel")
+        self.cameraFunctioLabel.setFrameShape(QFrame.Box)
         self.cameraFunctioLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
         self.identificationGridLayout.addWidget(self.cameraFunctioLabel, 2, 1, 1, 1)
 
         self.cameraCoverageLabel = QLabel(self.identificationTab)
         self.cameraCoverageLabel.setObjectName(u"cameraCoverageLabel")
+        self.cameraCoverageLabel.setFrameShape(QFrame.Box)
         self.cameraCoverageLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
         self.identificationGridLayout.addWidget(self.cameraCoverageLabel, 4, 0, 1, 2)
@@ -172,30 +177,35 @@ class Ui_MainWindow(object):
         self.infrastructureGridLayout.setObjectName(u"infrastructureGridLayout")
         self.cameraModelLabel = QLabel(self.infrastructerTab)
         self.cameraModelLabel.setObjectName(u"cameraModelLabel")
+        self.cameraModelLabel.setFrameShape(QFrame.Box)
         self.cameraModelLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
         self.infrastructureGridLayout.addWidget(self.cameraModelLabel, 2, 0, 1, 1)
 
         self.cameraServerLabel = QLabel(self.infrastructerTab)
         self.cameraServerLabel.setObjectName(u"cameraServerLabel")
+        self.cameraServerLabel.setFrameShape(QFrame.Box)
         self.cameraServerLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
         self.infrastructureGridLayout.addWidget(self.cameraServerLabel, 1, 0, 1, 1)
 
         self.cameraIPaddressLabel = QLabel(self.infrastructerTab)
         self.cameraIPaddressLabel.setObjectName(u"cameraIPaddressLabel")
+        self.cameraIPaddressLabel.setFrameShape(QFrame.Box)
         self.cameraIPaddressLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
         self.infrastructureGridLayout.addWidget(self.cameraIPaddressLabel, 0, 0, 1, 2)
 
         self.cameraRackLabel = QLabel(self.infrastructerTab)
         self.cameraRackLabel.setObjectName(u"cameraRackLabel")
+        self.cameraRackLabel.setFrameShape(QFrame.Box)
         self.cameraRackLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
         self.infrastructureGridLayout.addWidget(self.cameraRackLabel, 1, 1, 1, 1)
 
         self.cameraRetentionLabel = QLabel(self.infrastructerTab)
         self.cameraRetentionLabel.setObjectName(u"cameraRetentionLabel")
+        self.cameraRetentionLabel.setFrameShape(QFrame.Box)
         self.cameraRetentionLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
         self.infrastructureGridLayout.addWidget(self.cameraRetentionLabel, 2, 1, 1, 1)
@@ -212,18 +222,21 @@ class Ui_MainWindow(object):
         self.statusGridLayout.setObjectName(u"statusGridLayout")
         self.cameraStartDateLabel = QLabel(self.statusTab)
         self.cameraStartDateLabel.setObjectName(u"cameraStartDateLabel")
+        self.cameraStartDateLabel.setFrameShape(QFrame.Box)
         self.cameraStartDateLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
         self.statusGridLayout.addWidget(self.cameraStartDateLabel, 1, 0, 1, 1)
 
         self.cameraEndDateLabel = QLabel(self.statusTab)
         self.cameraEndDateLabel.setObjectName(u"cameraEndDateLabel")
+        self.cameraEndDateLabel.setFrameShape(QFrame.Box)
         self.cameraEndDateLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
         self.statusGridLayout.addWidget(self.cameraEndDateLabel, 1, 1, 1, 1)
 
         self.cameraStatusLabel = QLabel(self.statusTab)
         self.cameraStatusLabel.setObjectName(u"cameraStatusLabel")
+        self.cameraStatusLabel.setFrameShape(QFrame.Box)
         self.cameraStatusLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
         self.statusGridLayout.addWidget(self.cameraStatusLabel, 0, 0, 1, 2)
@@ -257,12 +270,14 @@ class Ui_MainWindow(object):
         self.actionGridLayout.setObjectName(u"actionGridLayout")
         self.cameraNoteLabel = QLabel(self.actionTab)
         self.cameraNoteLabel.setObjectName(u"cameraNoteLabel")
+        self.cameraNoteLabel.setFrameShape(QFrame.Box)
         self.cameraNoteLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
         self.actionGridLayout.addWidget(self.cameraNoteLabel, 0, 0, 1, 1)
 
         self.cameraActionLabel = QLabel(self.actionTab)
         self.cameraActionLabel.setObjectName(u"cameraActionLabel")
+        self.cameraActionLabel.setFrameShape(QFrame.Box)
         self.cameraActionLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
         self.actionGridLayout.addWidget(self.cameraActionLabel, 1, 0, 1, 1)
@@ -356,7 +371,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, -723, 823, 1288))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 823, 1288))
         self.verticalLayout_9 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
         self.addCameraFormLayout = QFormLayout()
@@ -553,6 +568,7 @@ class Ui_MainWindow(object):
         self.gridLayout_8.setObjectName(u"gridLayout_8")
         self.addCameraStartDateEdit = QDateTimeEdit(self.healthStatusGroupBox)
         self.addCameraStartDateEdit.setObjectName(u"addCameraStartDateEdit")
+        self.addCameraStartDateEdit.setCalendarPopup(True)
 
         self.gridLayout_8.addWidget(self.addCameraStartDateEdit, 1, 1, 1, 1, Qt.AlignRight)
 
@@ -568,6 +584,8 @@ class Ui_MainWindow(object):
 
         self.addCameraEndDateEdit = QDateTimeEdit(self.healthStatusGroupBox)
         self.addCameraEndDateEdit.setObjectName(u"addCameraEndDateEdit")
+        self.addCameraEndDateEdit.setEnabled(True)
+        self.addCameraEndDateEdit.setCalendarPopup(True)
 
         self.gridLayout_8.addWidget(self.addCameraEndDateEdit, 1, 3, 1, 1)
 
@@ -713,7 +731,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         self.stackedWidget.setCurrentIndex(0)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(3)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -791,22 +809,22 @@ class Ui_MainWindow(object):
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Ubuntu Sans'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
-"<h2 style=\" margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:x-large; font-weight:600;\">Aplikacija za upravljanje kamerama</span> </h2>\n"
+"<h2 style=\" margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:x-large; font-weight:600;\">Aplikacija za upravljanje kamerama </span></h2>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Verzija:</span> 1.0 </p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Ova aplikacija predstavlja interni softverski alat namenjen za pregled, organizaciju i upravljanje informacijama o kamerama unutar sistema. Razvijen"
                         "a je sa ciljem da olak\u0161a pregled postoje\u0107ih kamera, njihovu evidenciju, kao i brzu dostupnost klju\u010dnih podataka vezanih za svaku pojedina\u010dnu kameru. </p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Korisnicima omogu\u0107ava: </p>\n"
-"<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Pregled kompletne liste kamera kroz tabelarni prikaz</li>\n"
-"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Brzu pretragu i filtriranje kamera</li>\n"
-"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Prikaz detaljnih informacija o svakoj kameri</li>\n"
-"<li style=\" margin-top:0px; margin-bottom:0px; marg"
-                        "in-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Vizuelni prikaz (slika/screenshot) zone koju kamera pokriva</li>\n"
-"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Dodavanje novih kamera u sistem</li>\n"
-"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Izmenu postoje\u0107ih podataka o kamerama</li>\n"
-"<li style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Brisanje kamera iz evidencije uz potvrdu </li></ul>\n"
-"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Aplikacija je dizajnirana za internu upotrebu i ne uklju\u010duje funkcionalnosti za video streaming niti obradu u\u017eivo snimaka. Fokus je isklju\u010divo na organizaciji i preglednosti podataka. </p>\n"
-"<p style=\" margin-top:12px; margin-bot"
-                        "tom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Autor:</span> Milan Vasovic<br /><span style=\" font-weight:600;\">Razvio:</span> AriusSystems<br /><span style=\" font-weight:600;\">Kontakt:</span> milan.vasovic.work@gmail.com </p>\n"
+"<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\"\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Pregled kompletne liste kamera kroz tabelarni prikaz</li>\n"
+"<li style=\"\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Brzu pretragu i filtriranje kamera</li>\n"
+"<li style=\"\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Prikaz detaljnih informacija o svakoj kameri</li>\n"
+"<li style=\"\" styl"
+                        "e=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Vizuelni prikaz (slika/screenshot) zone koju kamera pokriva</li>\n"
+"<li style=\"\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Dodavanje novih kamera u sistem</li>\n"
+"<li style=\"\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Izmenu postoje\u0107ih podataka o kamerama</li>\n"
+"<li style=\"\" style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Brisanje kamera iz evidencije uz potvrdu </li></ul>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Aplikacija je dizajnirana za internu upotrebu i ne uklju\u010duje funkcionalnosti za video streaming niti obradu u\u017eivo snimaka. Fokus je isklju\u010divo na organizac"
+                        "iji i preglednosti podataka. </p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Autor:</span> Milan Vasovic<br /><span style=\" font-weight:600;\">Razvio:</span> AriusSystems<br /><span style=\" font-weight:600;\">Kontakt:</span> milan.vasovic.work@gmail.com </p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Licenca:</span><br />Ovaj softver je vlasni\u0161tvo kompanije AriusSystems i namenjen je isklju\u010divo za internu upotrebu. Sva prava su zadr\u017eana. Nije dozvoljeno kopiranje, distribucija, modifikacija ili dalja prodaja ovog softvera bez izri\u010dite dozvole autora. </p></body></html>", None))
         self.mainMenu.setTitle(QCoreApplication.translate("MainWindow", u"Meni", None))
     # retranslateUi

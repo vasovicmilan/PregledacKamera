@@ -180,6 +180,7 @@ class CameraController(QObject):
             if not cameras:
                 show_warning("Nema rezultata za pretragu.", parent=self.window)
                 self.ui.cameraTable.setRowCount(0)
+                self._clear_details()
                 return
 
             self._populate_table(cameras)
@@ -196,6 +197,11 @@ class CameraController(QObject):
         table.setRowCount(0)
         table.setColumnCount(5)
         table.setHorizontalHeaderLabels(["ID", "Kod", "IP", "Lokacija", "Status"])
+
+        if not cameras:
+            table.setSortingEnabled(True)
+            self._clear_details()
+            return
 
         for row_idx, cam in enumerate(cameras):
             table.insertRow(row_idx)
@@ -223,10 +229,35 @@ class CameraController(QObject):
 
         table.setSortingEnabled(True)
 
+    # 🧹 ČIŠĆENJE DETALJA KAMERE
+    def _clear_details(self):
+        """Resetuje sve detalje kamere na prazno i briše sliku."""
+        self.current_camera = None
+        self._set_label_value(self.ui.cameraIDLabel, "")
+        self._set_label_value(self.ui.cameraCodeLabel, "")
+        self._set_label_value(self.ui.cameraTypeLabel, "")
+        self._set_label_value(self.ui.cameraLocationLabel, "")
+        self._set_label_value(self.ui.cameraPurposeLabel, "")
+        self._set_label_value(self.ui.cameraFunctioLabel, "")
+        self._set_label_value(self.ui.cameraCoverageLabel, "")
+        self._set_label_value(self.ui.cameraServerLabel, "")
+        self._set_label_value(self.ui.cameraIPaddressLabel, "")
+        self._set_label_value(self.ui.cameraRackLabel, "")
+        self._set_label_value(self.ui.cameraRetentionLabel, "")
+        self._set_label_value(self.ui.cameraModelLabel, "")
+        self._set_label_value(self.ui.cameraStartDateLabel, "")
+        self._set_label_value(self.ui.cameraEndDateLabel, "")
+        self._set_label_value(self.ui.cameraStatusLabel, "")
+        self._set_label_value(self.ui.cameraNoteLabel, "")
+        self._set_label_value(self.ui.cameraActionLabel, "")
+        self.ui.cameraImageLabel.clear()
+        self.ui.cameraImageLabel.setText("Slika")
+
     # 📄 SELECT
     def load_selected_camera(self):
         selected = self.ui.cameraTable.selectedItems()
         if not selected:
+            self._clear_details()   # <--- DODAJ OVU LINIJU
             return
 
         row = selected[0].row()
@@ -422,7 +453,7 @@ class CameraController(QObject):
 
         if confirm:
             self.service.delete(camera_id)
-            self.load_table()
+            self.load_table()   # load_table će pozvati _populate_table, koja ako nema kamera čisti detalje
 
     # 🧾 FORM
     def _fill_form(self, camera):

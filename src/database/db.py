@@ -1,22 +1,29 @@
 import sqlite3
 import os
+import shutil
 from config import settings
 
 
 class CameraDatabase:
     def __init__(self):
-        # 📁 koristi globalni path iz settings
         db_path = settings.DB_PATH
-
-        # 📁 napravi folder ako treba (ako ikad prebaciš DB u folder)
         db_dir = os.path.dirname(db_path)
-        if not os.path.exists(db_dir):
-            os.makedirs(db_dir)
 
+        # 📁 Napravi folder ako ne postoji
+        os.makedirs(db_dir, exist_ok=True)
+
+        # 🔥 Ako baza ne postoji u korisničkom folderu, pokušaj da je kopiraš iz paketa
+        if not os.path.exists(db_path):
+            bundled_db = settings.resource_path("database/cameras.db")
+            if os.path.exists(bundled_db):
+                shutil.copy2(bundled_db, db_path)
+            # Ako nema početne baze u paketu, nastaviće se sa kreiranjem prazne baze
+
+        # 📁 Poveži se na bazu
         self.conn = sqlite3.connect(db_path)
         self.conn.row_factory = sqlite3.Row
 
-        # 🔥 kreiranje tabele
+        # 🔥 Kreiraj tabelu ako ne postoji (sigurnosno, u slučaju da je baza prazna)
         self.create_table()
 
     def get_connection(self):
@@ -45,6 +52,5 @@ class CameraDatabase:
             end_date TEXT
         )
         """
-
         self.conn.execute(query)
         self.conn.commit()

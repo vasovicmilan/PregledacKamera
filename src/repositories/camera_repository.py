@@ -157,6 +157,13 @@ class CameraRepository:
 
         return [self._map_to_table(row) for row in rows]
 
+    # ✅ BROJ KAMERA
+    def count(self):
+        """Vraća ukupan broj kamera u bazi."""
+        cursor = self.conn.cursor()
+        cursor.execute("SELECT COUNT(*) FROM cameras")
+        return cursor.fetchone()[0]
+
     # 🔹 TABLE MAPPER
     def _map_to_table(self, row):
         return {

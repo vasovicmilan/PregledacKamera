@@ -1,0 +1,1123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>877</width>
+    <height>674</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Pregledac kamera</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_8">
+    <item>
+     <widget class="QStackedWidget" name="stackedWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="cameraList">
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QWidget" name="cameraListHorizontalWidget" native="true">
+          <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="4,6">
+           <item>
+            <widget class="QWidget" name="leftSide" native="true">
+             <layout class="QGridLayout" name="gridLayout_5">
+              <item row="1" column="1">
+               <widget class="QPushButton" name="searchButton">
+                <property name="maximumSize">
+                 <size>
+                  <width>500</width>
+                  <height>250</height>
+                 </size>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QPushButton {
+    background-color: #2d89ef;
+    color: white;
+    border-radius: 6px;
+    padding: 6px;
+}
+
+QPushButton:hover {
+    background-color: #1b5fbf;
+}
+
+QPushButton:pressed {
+    background-color: #144a99;
+}</string>
+                </property>
+                <property name="text">
+                 <string>Pretraga</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLineEdit" name="searchEdit"/>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="searchLabel">
+                <property name="text">
+                 <string>Pretraga</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0" colspan="2">
+               <widget class="QTableWidget" name="cameraTable">
+                <property name="cursor" stdset="0">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="verticalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAlwaysOff</enum>
+                </property>
+                <property name="horizontalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAlwaysOff</enum>
+                </property>
+                <property name="rowCount">
+                 <number>0</number>
+                </property>
+                <property name="columnCount">
+                 <number>0</number>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QWidget" name="rightSide" native="true">
+             <layout class="QGridLayout" name="gridLayout_6">
+              <item row="19" column="0" colspan="2">
+               <widget class="QPushButton" name="cameraDeleteButton">
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QPushButton {
+    background-color: #c0392b;
+    color: white;
+    border-radius: 6px;
+    padding: 6px;
+}
+
+QPushButton:hover {
+    background-color: #e74c3c;
+}
+
+QPushButton:pressed {
+    background-color: #922b21;
+}</string>
+                </property>
+                <property name="text">
+                 <string>Brisanje Kamere</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0" colspan="2">
+               <widget class="QTabWidget" name="tabWidget">
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="currentIndex">
+                 <number>0</number>
+                </property>
+                <widget class="QWidget" name="identificationTab">
+                 <property name="cursor">
+                  <cursorShape>ArrowCursor</cursorShape>
+                 </property>
+                 <attribute name="title">
+                  <string>Informacije</string>
+                 </attribute>
+                 <layout class="QHBoxLayout" name="horizontalLayout_5">
+                  <item>
+                   <layout class="QGridLayout" name="identificationGridLayout">
+                    <item row="1" column="1">
+                     <widget class="QLabel" name="cameraTypeLabel">
+                      <property name="frameShape">
+                       <enum>QFrame::Box</enum>
+                      </property>
+                      <property name="text">
+                       <string>Tip:</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="0">
+                     <widget class="QLabel" name="cameraLocationLabel">
+                      <property name="frameShape">
+                       <enum>QFrame::Box</enum>
+                      </property>
+                      <property name="text">
+                       <string>Lokacija:</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="2" column="0">
+                     <widget class="QLabel" name="cameraPurposeLabel">
+                      <property name="frameShape">
+                       <enum>QFrame::Box</enum>
+                      </property>
+                      <property name="text">
+                       <string>Svrha:</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="2" column="1">
+                     <widget class="QLabel" name="cameraFunctioLabel">
+                      <property name="frameShape">
+                       <enum>QFrame::Box</enum>
+                      </property>
+                      <property name="text">
+                       <string>Namena:</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="4" column="0" colspan="2">
+                     <widget class="QLabel" name="cameraCoverageLabel">
+                      <property name="frameShape">
+                       <enum>QFrame::Box</enum>
+                      </property>
+                      <property name="text">
+                       <string>Pokrivenost:</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="infrastructerTab">
+                 <attribute name="title">
+                  <string>Infrastruktura</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_2">
+                  <item>
+                   <layout class="QGridLayout" name="infrastructureGridLayout">
+                    <item row="2" column="0">
+                     <widget class="QLabel" name="cameraModelLabel">
+                      <property name="frameShape">
+                       <enum>QFrame::Box</enum>
+                      </property>
+                      <property name="text">
+                       <string>Rezolucija/Model:</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="0">
+                     <widget class="QLabel" name="cameraServerLabel">
+                      <property name="frameShape">
+                       <enum>QFrame::Box</enum>
+                      </property>
+                      <property name="text">
+                       <string>Server:</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="0" colspan="2">
+                     <widget class="QLabel" name="cameraIPaddressLabel">
+                      <property name="frameShape">
+                       <enum>QFrame::Box</enum>
+                      </property>
+                      <property name="text">
+                       <string>IP Adresa:</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="1">
+                     <widget class="QLabel" name="cameraRackLabel">
+                      <property name="frameShape">
+                       <enum>QFrame::Box</enum>
+                      </property>
+                      <property name="text">
+                       <string>Rek:</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="2" column="1">
+                     <widget class="QLabel" name="cameraRetentionLabel">
+                      <property name="frameShape">
+                       <enum>QFrame::Box</enum>
+                      </property>
+                      <property name="text">
+                       <string>Retencija:</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="statusTab">
+                 <attribute name="title">
+                  <string>Status</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_6">
+                  <item>
+                   <layout class="QGridLayout" name="statusGridLayout">
+                    <item row="1" column="0">
+                     <widget class="QLabel" name="cameraStartDateLabel">
+                      <property name="frameShape">
+                       <enum>QFrame::Box</enum>
+                      </property>
+                      <property name="text">
+                       <string>Pocetak:</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="1">
+                     <widget class="QLabel" name="cameraEndDateLabel">
+                      <property name="frameShape">
+                       <enum>QFrame::Box</enum>
+                      </property>
+                      <property name="text">
+                       <string>Kraj:</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="0" colspan="2">
+                     <widget class="QLabel" name="cameraStatusLabel">
+                      <property name="frameShape">
+                       <enum>QFrame::Box</enum>
+                      </property>
+                      <property name="text">
+                       <string>Status:</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="imageTab">
+                 <attribute name="title">
+                  <string>Slika</string>
+                 </attribute>
+                 <layout class="QHBoxLayout" name="horizontalLayout_6">
+                  <item>
+                   <layout class="QVBoxLayout" name="imageVerticalLayout">
+                    <item>
+                     <widget class="QLabel" name="cameraImageLabel">
+                      <property name="frameShape">
+                       <enum>QFrame::Box</enum>
+                      </property>
+                      <property name="text">
+                       <string>Slika</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="actionTab">
+                 <attribute name="title">
+                  <string>Akcije</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_3">
+                  <item>
+                   <layout class="QGridLayout" name="actionGridLayout">
+                    <item row="0" column="0">
+                     <widget class="QLabel" name="cameraNoteLabel">
+                      <property name="frameShape">
+                       <enum>QFrame::Box</enum>
+                      </property>
+                      <property name="text">
+                       <string>Napomena:</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="0">
+                     <widget class="QLabel" name="cameraActionLabel">
+                      <property name="frameShape">
+                       <enum>QFrame::Box</enum>
+                      </property>
+                      <property name="text">
+                       <string>Akcije:</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </widget>
+               </widget>
+              </item>
+              <item row="9" column="1">
+               <widget class="QPushButton" name="cameraEditButton">
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QPushButton {
+    background-color: #27ae60;
+    color: white;
+    border-radius: 6px;
+    padding: 6px;
+}
+
+QPushButton:hover {
+    background-color: #1e8449;
+}
+
+QPushButton:pressed {
+    background-color: #145a32;
+}</string>
+                </property>
+                <property name="text">
+                 <string>Izmena</string>
+                </property>
+               </widget>
+              </item>
+              <item row="9" column="0">
+               <widget class="QPushButton" name="cameraControllButton">
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QPushButton {
+    background-color: #27ae60;
+    color: white;
+    border-radius: 6px;
+    padding: 6px;
+}
+
+QPushButton:hover {
+    background-color: #1e8449;
+}
+
+QPushButton:pressed {
+    background-color: #145a32;
+}</string>
+                </property>
+                <property name="text">
+                 <string>Upravljanje</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="cameraIDLabel">
+                <property name="text">
+                 <string>ID:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLabel" name="cameraCodeLabel">
+                <property name="text">
+                 <string>Kod:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="18" column="0" colspan="2">
+               <spacer name="horizontalSpacer_8">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="addCamera">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <layout class="QFormLayout" name="formLayout">
+          <property name="formAlignment">
+           <set>Qt::AlignHCenter|Qt::AlignTop</set>
+          </property>
+          <property name="horizontalSpacing">
+           <number>2</number>
+          </property>
+          <property name="verticalSpacing">
+           <number>2</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QPushButton" name="addCameraGoBackButton">
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+    background-color: #c0392b;
+    color: white;
+    border-radius: 6px;
+    padding: 6px;
+ margin-bottom: 10px}
+
+QPushButton:hover {
+    background-color: #e74c3c;
+}
+
+QPushButton:pressed {
+    background-color: #922b21;
+}</string>
+            </property>
+            <property name="text">
+             <string>Nazad</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="addCameraLabel">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>Dodavanje Kamere</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="margin">
+             <number>0</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="2">
+           <widget class="QScrollArea" name="scrollArea">
+            <property name="widgetResizable">
+             <bool>true</bool>
+            </property>
+            <widget class="QWidget" name="scrollAreaWidgetContents">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>-834</y>
+               <width>823</width>
+               <height>1292</height>
+              </rect>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_9">
+              <property name="topMargin">
+               <number>9</number>
+              </property>
+              <item>
+               <layout class="QFormLayout" name="addCameraFormLayout">
+                <item row="0" column="0">
+                 <widget class="QLabel" name="addCameraCodeLabel">
+                  <property name="text">
+                   <string>Kod</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QLineEdit" name="addCameraCodeLineEdit"/>
+                </item>
+                <item row="2" column="0" colspan="2">
+                 <widget class="QGroupBox" name="networkGroupBox">
+                  <property name="title">
+                   <string>1. Mreza i Infrastruktura</string>
+                  </property>
+                  <layout class="QFormLayout" name="formLayout_2">
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="addCameraIPAddressLabel">
+                     <property name="text">
+                      <string>IP Adresa</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QLineEdit" name="addCameraIPAddressLineEdit"/>
+                   </item>
+                   <item row="1" column="0">
+                    <widget class="QLabel" name="addCameraServerLabel">
+                     <property name="text">
+                      <string>Server</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="1">
+                    <widget class="QLineEdit" name="addCameraServerLineEdit"/>
+                   </item>
+                   <item row="2" column="0">
+                    <widget class="QLabel" name="addCameraRackLabel">
+                     <property name="text">
+                      <string>Rek</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="1">
+                    <widget class="QLineEdit" name="addCameraRackLineEdit"/>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item row="4" column="0" colspan="2">
+                 <widget class="QGroupBox" name="locationGroupBox">
+                  <property name="title">
+                   <string>2. Lokacija i Pokrivanje</string>
+                  </property>
+                  <layout class="QFormLayout" name="formLayout_3">
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="addCameraLocationLabel">
+                     <property name="text">
+                      <string>Lokacija</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QLineEdit" name="addCameraLocationLineEdit"/>
+                   </item>
+                   <item row="1" column="0">
+                    <widget class="QLabel" name="addCameraCoverageLabel">
+                     <property name="text">
+                      <string>Pokrivenost</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="1">
+                    <widget class="QLineEdit" name="addCameraCoverageLineEdit"/>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item row="14" column="0" colspan="2">
+                 <widget class="QGroupBox" name="addCameraActionGroupBox">
+                  <property name="title">
+                   <string>7. Akcije</string>
+                  </property>
+                  <layout class="QFormLayout" name="formLayout_5">
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="addCameraNoteLabel">
+                     <property name="toolTip">
+                      <string>Nije Obavezno Polje</string>
+                     </property>
+                     <property name="text">
+                      <string>Napomena</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="0">
+                    <widget class="QLabel" name="addCameraActionLabel">
+                     <property name="text">
+                      <string>Akcija</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0" colspan="2">
+                    <widget class="QTextEdit" name="addCameraNoteEdit"/>
+                   </item>
+                   <item row="3" column="0" colspan="2">
+                    <widget class="QTextEdit" name="addCameraActionTextEdit"/>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item row="16" column="0" colspan="2">
+                 <widget class="QPushButton" name="addCameraButton">
+                  <property name="cursor">
+                   <cursorShape>PointingHandCursor</cursorShape>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QPushButton {
+    background-color: #27ae60;
+    color: white;
+    border-radius: 6px;
+    padding: 6px;
+}
+
+QPushButton:hover {
+    background-color: #1e8449;
+}
+
+QPushButton:pressed {
+    background-color: #145a32;
+}</string>
+                  </property>
+                  <property name="text">
+                   <string>Dodajte Kameru</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="6" column="0" colspan="2">
+                 <widget class="QGroupBox" name="typeGroupBox">
+                  <property name="title">
+                   <string>3. Tip i Namena</string>
+                  </property>
+                  <layout class="QFormLayout" name="formLayout_6">
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="addCameraTypeLabel">
+                     <property name="text">
+                      <string>Tip</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QLineEdit" name="addCameraTypeLineEdit"/>
+                   </item>
+                   <item row="2" column="1">
+                    <widget class="QLineEdit" name="addCameraFunctionLineEdit"/>
+                   </item>
+                   <item row="4" column="1">
+                    <widget class="QLineEdit" name="addCameraPurposeLineEdit"/>
+                   </item>
+                   <item row="2" column="0">
+                    <widget class="QLabel" name="addCameraFunctionLabel">
+                     <property name="text">
+                      <string>Namena</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="4" column="0">
+                    <widget class="QLabel" name="addCameraPuropseLabel">
+                     <property name="text">
+                      <string>Svrha</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item row="8" column="0" colspan="2">
+                 <widget class="QGroupBox" name="technicalGroupBox">
+                  <property name="title">
+                   <string>4. Tehnicki Podaci</string>
+                  </property>
+                  <layout class="QFormLayout" name="formLayout_7">
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="addCameraModelLabel">
+                     <property name="text">
+                      <string>Model</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QLineEdit" name="addCameraModelLineEdit"/>
+                   </item>
+                   <item row="2" column="1">
+                    <widget class="QLineEdit" name="addCameraRetentionLineEdit"/>
+                   </item>
+                   <item row="2" column="0">
+                    <widget class="QLabel" name="addCameraRetentionLabel">
+                     <property name="text">
+                      <string>Retencija</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item row="10" column="0" colspan="2">
+                 <widget class="QGroupBox" name="healthStatusGroupBox">
+                  <property name="title">
+                   <string>5. Status</string>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_8">
+                   <item row="1" column="1" alignment="Qt::AlignRight">
+                    <widget class="QDateTimeEdit" name="addCameraStartDateEdit">
+                     <property name="calendarPopup">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <widget class="QLabel" name="addCameraStartDateLabel">
+                     <property name="text">
+                      <string>Postavljena</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="2" alignment="Qt::AlignRight">
+                    <widget class="QLabel" name="addCameraEndDateLabel">
+                     <property name="text">
+                      <string>Skinuta</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="3">
+                    <widget class="QDateTimeEdit" name="addCameraEndDateEdit">
+                     <property name="enabled">
+                      <bool>true</bool>
+                     </property>
+                     <property name="calendarPopup">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column="0" colspan="4">
+                    <widget class="QGroupBox" name="statusGroupBox">
+                     <property name="title">
+                      <string>Status</string>
+                     </property>
+                     <layout class="QHBoxLayout" name="horizontalLayout_4">
+                      <item>
+                       <widget class="QRadioButton" name="addCameraActiveRadioButton">
+                        <property name="text">
+                         <string>Aktivna</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QRadioButton" name="addCameraInactiveButton">
+                        <property name="text">
+                         <string>Neaktivna</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QRadioButton" name="addCameraDismantleRadioButton">
+                        <property name="layoutDirection">
+                         <enum>Qt::LeftToRight</enum>
+                        </property>
+                        <property name="text">
+                         <string>Skinuta</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <spacer name="horizontalSpacer">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="3" column="0" colspan="2">
+                 <spacer name="horizontalSpacer_2">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="5" column="0" colspan="2">
+                 <spacer name="horizontalSpacer_3">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="7" column="0" colspan="2">
+                 <spacer name="horizontalSpacer_4">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="9" column="0" colspan="2">
+                 <spacer name="horizontalSpacer_5">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="11" column="0" colspan="2">
+                 <spacer name="horizontalSpacer_6">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="13" column="0" colspan="2">
+                 <spacer name="horizontalSpacer_7">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="12" column="0" colspan="2">
+                 <widget class="QGroupBox" name="imageGroupBox">
+                  <property name="title">
+                   <string>6. Slika</string>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_10">
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="addCameraImageLabel">
+                     <property name="text">
+                      <string>Izaberite Sliku</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QLineEdit" name="addCameraImageLineEdit">
+                     <property name="readOnly">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="2">
+                    <widget class="QPushButton" name="addCameraImageUploadButton">
+                     <property name="cursor">
+                      <cursorShape>PointingHandCursor</cursorShape>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">QPushButton {
+    background-color: #2d89ef;
+    color: white;
+    border-radius: 6px;
+    padding: 6px;
+}
+
+QPushButton:hover {
+    background-color: #1b5fbf;
+}
+
+QPushButton:pressed {
+    background-color: #144a99;
+}</string>
+                     </property>
+                     <property name="text">
+                      <string>Izaberi Sliku</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="3">
+                    <widget class="QLabel" name="addCameraPreviewImageLabel">
+                     <property name="frameShape">
+                      <enum>QFrame::Box</enum>
+                     </property>
+                     <property name="text">
+                      <string>Prikaz Slike</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="about">
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <layout class="QVBoxLayout" name="abotVerticalLayout">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="aboutLabel">
+            <property name="text">
+             <string>O Aplikaciji</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignHCenter|Qt::AlignTop</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTextBrowser" name="aboutTextBrowser">
+            <property name="html">
+             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu Sans'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;h2 style=&quot; margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:x-large; font-weight:600;&quot;&gt;Aplikacija za upravljanje kamerama &lt;/span&gt;&lt;/h2&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Verzija:&lt;/span&gt; 1.0 &lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Ova aplikacija predstavlja interni softverski alat namenjen za pregled, organizaciju i upravljanje informacijama o kamerama unutar sistema. Razvijena je sa ciljem da olakša pregled postojećih kamera, njihovu evidenciju, kao i brzu dostupnost ključnih podataka vezanih za svaku pojedinačnu kameru. &lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Korisnicima omogućava: &lt;/p&gt;
+&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Pregled kompletne liste kamera kroz tabelarni prikaz&lt;/li&gt;
+&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Brzu pretragu i filtriranje kamera&lt;/li&gt;
+&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Prikaz detaljnih informacija o svakoj kameri&lt;/li&gt;
+&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vizuelni prikaz (slika/screenshot) zone koju kamera pokriva&lt;/li&gt;
+&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Dodavanje novih kamera u sistem&lt;/li&gt;
+&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Izmenu postojećih podataka o kamerama&lt;/li&gt;
+&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Brisanje kamera iz evidencije uz potvrdu &lt;/li&gt;&lt;/ul&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Aplikacija je dizajnirana za internu upotrebu i ne uključuje funkcionalnosti za video streaming niti obradu uživo snimaka. Fokus je isključivo na organizaciji i preglednosti podataka. &lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Autor:&lt;/span&gt; Milan Vasovic&lt;br /&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Razvio:&lt;/span&gt; AriusSystems&lt;br /&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Kontakt:&lt;/span&gt; milan.vasovic.work@gmail.com &lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Licenca:&lt;/span&gt;&lt;br /&gt;Ovaj softver je vlasništvo kompanije AriusSystems i namenjen je isključivo za internu upotrebu. Sva prava su zadržana. Nije dozvoljeno kopiranje, distribucija, modifikacija ili dalja prodaja ovog softvera bez izričite dozvole autora. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="overwriteMode">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>877</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <widget class="QMenu" name="mainMenu">
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="title">
+     <string>Meni</string>
+    </property>
+    <addaction name="actionAllCameras"/>
+    <addaction name="actionAddCamera"/>
+    <addaction name="separator"/>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="mainMenu"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionAllCameras">
+   <property name="text">
+    <string>Sve Kamere</string>
+   </property>
+  </action>
+  <action name="actionAddCamera">
+   <property name="text">
+    <string>Dodaj Kameru</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>O Aplikaciji</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

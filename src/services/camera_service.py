@@ -1,7 +1,7 @@
 from utils.validators import validate_camera, ValidationError
 from utils.image_handler import process_image
 from models.camera import Camera, CameraStatus
-from utils.logger import log_warning
+from utils.logger import log_info, log_warning, log_error
 import os
 
 
@@ -11,61 +11,76 @@ class CameraService:
 
     # ➕ CREATE
     def create_camera(self, camera):
-        if self.repository.exists_by_code(camera.code):
-            raise ValidationError("Kamera sa ovim kodom već postoji.")
+        try:
+            if self.repository.exists_by_code(camera.code):
+                log_warning(f"Pokušaj dodavanja kamere sa postojećim kodom: {camera.code}")
+                raise ValidationError("Kamera sa ovim kodom već postoji.")
 
-        self._normalize(camera)
+            self._normalize(camera)
 
-        processed_path = process_image(camera.image_path, camera.code)
-        camera.image_path = processed_path
+            processed_path = process_image(camera.image_path, camera.code)
+            camera.image_path = processed_path
 
-        validate_camera(camera)
+            validate_camera(camera)
 
-        # 🔥 repo mora da vrati lastrowid
-        new_id = self.repository.add(camera)
-        return new_id
+            new_id = self.repository.add(camera)
+            log_info(f"Kamera dodata: {camera.code} (ID: {new_id})")
+            return new_id
+
+        except ValidationError as e:
+            log_warning(f"Validaciona greška pri dodavanju kamere {camera.code}: {e}")
+            raise
+        except Exception as e:
+            log_error(f"Neočekivana greška pri dodavanju kamere {camera.code}: {e}")
+            raise
 
     # ✏️ UPDATE
     def update_camera(self, camera):
-        existing = self.repository.get_by_id(camera.id)
+        try:
+            existing = self.repository.get_by_id(camera.id)
+            if not existing:
+                log_warning(f"Pokušaj izmene nepostojeće kamere ID: {camera.id}")
+                raise ValidationError("Kamera ne postoji.")
 
-        if not existing:
-            raise ValidationError("Kamera ne postoji.")
+            if camera.code != existing.code:
+                if self.repository.exists_by_code(camera.code):
+                    log_warning(f"Pokušaj izmene sa već postojećim kodom: {camera.code}")
+                    raise ValidationError("Kamera sa ovim kodom već postoji.")
 
-        if camera.code != existing.code:
-            if self.repository.exists_by_code(camera.code):
-                raise ValidationError("Kamera sa ovim kodom već postoji.")
+            self._normalize(camera)
 
-        self._normalize(camera)
-
-        # 📷 SLIKA
-        if camera.image_path and camera.image_path != existing.image_path:
-
-            new_path = process_image(camera.image_path, camera.code)
-
-            if new_path:
-                if existing.image_path and os.path.isfile(existing.image_path):
-                    try:
-                        os.remove(existing.image_path)
-                    except Exception as e:
-                        log_warning(f"Greška pri brisanju stare slike: {e}")
-
-                camera.image_path = new_path
+            # 📷 SLIKA
+            if camera.image_path and camera.image_path != existing.image_path:
+                new_path = process_image(camera.image_path, camera.code)
+                if new_path:
+                    if existing.image_path and os.path.isfile(existing.image_path):
+                        try:
+                            os.remove(existing.image_path)
+                        except Exception as e:
+                            log_warning(f"Greška pri brisanju stare slike: {e}")
+                    camera.image_path = new_path
+                else:
+                    camera.image_path = existing.image_path
             else:
                 camera.image_path = existing.image_path
-        else:
-            camera.image_path = existing.image_path
 
-        validate_camera(camera)
+            validate_camera(camera)
 
-        self.repository.update(camera)
-        return camera.id
+            self.repository.update(camera)
+            log_info(f"Kamera izmenjena: {camera.code} (ID: {camera.id})")
+            return camera.id
+
+        except ValidationError as e:
+            log_warning(f"Validaciona greška pri izmeni kamere {camera.code}: {e}")
+            raise
+        except Exception as e:
+            log_error(f"Neočekivana greška pri izmeni kamere {camera.code}: {e}")
+            raise
 
     # 📊 LIST (SORTIRANJE)
     def get_all_for_table(self, order_by="id", order_dir="ASC"):
         order_by = self._sanitize_order_by(order_by)
         order_dir = self._sanitize_order_dir(order_dir)
-
         return self.repository.get_all_for_table(order_by, order_dir)
 
     # 📄 DETAIL
@@ -76,46 +91,65 @@ class CameraService:
     def search(self, term=None, status=None, order_by="id", order_dir="ASC"):
         order_by = self._sanitize_order_by(order_by)
         order_dir = self._sanitize_order_dir(order_dir)
-
         return self.repository.search(term, status, order_by, order_dir)
 
     # ❌ DELETE
     def delete(self, camera_id):
-        camera = self.repository.get_by_id(camera_id)
+        try:
+            camera = self.repository.get_by_id(camera_id)
+            if not camera:
+                log_warning(f"Pokušaj brisanja nepostojeće kamere ID: {camera_id}")
+                raise ValidationError("Kamera ne postoji.")
 
-        if not camera:
-            raise ValidationError("Kamera ne postoji.")
+            if camera.image_path and os.path.isfile(camera.image_path):
+                try:
+                    os.remove(camera.image_path)
+                except Exception as e:
+                    log_warning(f"Greška pri brisanju slike za kameru {camera.code}: {e}")
 
-        if camera.image_path and os.path.isfile(camera.image_path):
-            try:
-                os.remove(camera.image_path)
-            except Exception as e:
-                log_warning(f"Greška pri brisanju slike: {e}")
+            self.repository.delete(camera_id)
+            log_info(f"Kamera obrisana: {camera.code} (ID: {camera_id})")
 
-        self.repository.delete(camera_id)
+        except ValidationError as e:
+            log_warning(f"Validaciona greška pri brisanju: {e}")
+            raise
+        except Exception as e:
+            log_error(f"Neočekivana greška pri brisanju kamere ID {camera_id}: {e}")
+            raise
 
     # ⚙️ STATUS
     def update_status(self, camera_id, status):
-        camera = self.repository.get_by_id(camera_id)
-
-        if not camera:
-            raise ValidationError("Kamera ne postoji.")
-
         try:
-            new_status = CameraStatus(status.lower())
-        except Exception:
-            raise ValidationError("Nevalidan status.")
+            camera = self.repository.get_by_id(camera_id)
+            if not camera:
+                log_warning(f"Pokušaj promene statusa nepostojeće kamere ID: {camera_id}")
+                raise ValidationError("Kamera ne postoji.")
 
-        # Ako se menja status u ACTIVE, obavezno obriši end_date
-        if new_status == CameraStatus.ACTIVE:
-            camera.end_date = None
+            try:
+                new_status = CameraStatus(status.lower())
+            except Exception:
+                log_warning(f"Nevalidan status '{status}' za kameru ID {camera_id}")
+                raise ValidationError("Nevalidan status.")
 
-        camera.health_status = new_status
+            # Ako se menja status u ACTIVE, obavezno obriši end_date
+            if new_status == CameraStatus.ACTIVE:
+                camera.end_date = None
 
-        # Validacija pre čuvanja (proveriće da li je end_date None za ACTIVE)
-        validate_camera(camera)
+            camera.health_status = new_status
+            self.repository.update(camera)
+            log_info(f"Status kamere promenjen: {camera.code} (ID: {camera_id}) → {status}")
 
-        self.repository.update(camera)
+        except ValidationError as e:
+            log_warning(f"Validaciona greška pri promeni statusa: {e}")
+            raise
+        except Exception as e:
+            log_error(f"Neočekivana greška pri promeni statusa kamere ID {camera_id}: {e}")
+            raise
+
+    # 📊 BROJ KAMERA
+    def count(self):
+        """Vraća ukupan broj kamera u bazi."""
+        return self.repository.count()
 
     # 🧠 NORMALIZACIJA
     def _normalize(self, camera):
@@ -125,19 +159,14 @@ class CameraService:
 
         if camera.server:
             camera.server = camera.server.strip()
-
         if camera.camera_type:
             camera.camera_type = camera.camera_type.strip()
-
         if camera.purpose:
             camera.purpose = camera.purpose.strip()
-
         if camera.camera_function:
             camera.camera_function = camera.camera_function.strip()
-
         if camera.model:
             camera.model = camera.model.strip()
-
         if camera.note:
             camera.note = camera.note.strip()
 
@@ -154,33 +183,29 @@ class CameraService:
                     camera = item
 
                 if self.repository.exists_by_code(camera.code):
+                    log_warning(f"Bulk skip: kamera sa kodom {camera.code} već postoji")
                     skipped += 1
                     continue
 
                 self._normalize(camera)
-
-                try:
-                    validate_camera(camera)
-                except ValidationError:
-                    skipped += 1
-                    continue
+                validate_camera(camera)
 
                 self.repository.add(camera)
                 inserted += 1
 
+            except ValidationError as e:
+                log_warning(f"Bulk skip: validaciona greška za kameru {camera.code}: {e}")
+                skipped += 1
             except Exception as e:
-                log_warning(f"Bulk insert skip: {e}")
+                log_error(f"Bulk skip: neočekivana greška za kameru {camera.code}: {e}")
                 skipped += 1
 
-        return {
-            "inserted": inserted,
-            "skipped": skipped
-        }
+        log_info(f"Bulk dodavanje završeno: {inserted} dodato, {skipped} preskočeno")
+        return {"inserted": inserted, "skipped": skipped}
 
     # 🔧 DICT → MODEL
     def _dict_to_camera(self, data: dict):
         status_value = (data.get("health_status") or "inactive").lower()
-
         try:
             status = CameraStatus(status_value)
         except Exception:
@@ -209,21 +234,8 @@ class CameraService:
 
     # 🔒 SECURITY (ORDER BY PROTECTION + NUMERIC SORT FIX)
     def _sanitize_order_by(self, order_by):
-        allowed = {
-            "id",
-            "code",
-            "ip_address",
-            "location",
-            "health_status"
-        }
-
-        if order_by not in allowed:
-            return "id"
-
-        return order_by
+        allowed = {"id", "code", "ip_address", "location", "health_status"}
+        return order_by if order_by in allowed else "id"
 
     def _sanitize_order_dir(self, order_dir):
-        if str(order_dir).upper() not in ("ASC", "DESC"):
-            return "ASC"
-
-        return order_dir.upper()
+        return order_dir.upper() if order_dir.upper() in ("ASC", "DESC") else "ASC"

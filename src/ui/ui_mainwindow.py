@@ -88,6 +88,7 @@ class Ui_MainWindow(object):
 
         self.cameraTable = QTableWidget(self.leftSide)
         self.cameraTable.setObjectName(u"cameraTable")
+        self.cameraTable.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.PointingHandCursor))
         self.cameraTable.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.cameraTable.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.cameraTable.setRowCount(0)
@@ -124,8 +125,10 @@ class Ui_MainWindow(object):
 
         self.tabWidget = QTabWidget(self.rightSide)
         self.tabWidget.setObjectName(u"tabWidget")
+        self.tabWidget.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.identificationTab = QWidget()
         self.identificationTab.setObjectName(u"identificationTab")
+        self.identificationTab.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
         self.horizontalLayout_5 = QHBoxLayout(self.identificationTab)
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
         self.identificationGridLayout = QGridLayout()
@@ -358,22 +361,48 @@ class Ui_MainWindow(object):
         self.addCamera.setEnabled(True)
         self.verticalLayout_4 = QVBoxLayout(self.addCamera)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
-        self.addCameraVerticalLayout = QVBoxLayout()
-        self.addCameraVerticalLayout.setObjectName(u"addCameraVerticalLayout")
+        self.formLayout = QFormLayout()
+        self.formLayout.setObjectName(u"formLayout")
+        self.formLayout.setFormAlignment(Qt.AlignHCenter|Qt.AlignTop)
+        self.formLayout.setHorizontalSpacing(2)
+        self.formLayout.setVerticalSpacing(2)
+        self.addCameraGoBackButton = QPushButton(self.addCamera)
+        self.addCameraGoBackButton.setObjectName(u"addCameraGoBackButton")
+        self.addCameraGoBackButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.addCameraGoBackButton.setStyleSheet(u"QPushButton {\n"
+"    background-color: #c0392b;\n"
+"    color: white;\n"
+"    border-radius: 6px;\n"
+"    padding: 6px;\n"
+" margin-bottom: 10px}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: #e74c3c;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color: #922b21;\n"
+"}")
+
+        self.formLayout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.addCameraGoBackButton)
+
         self.addCameraLabel = QLabel(self.addCamera)
         self.addCameraLabel.setObjectName(u"addCameraLabel")
+        self.addCameraLabel.setStyleSheet(u"")
         self.addCameraLabel.setAlignment(Qt.AlignCenter)
+        self.addCameraLabel.setMargin(0)
 
-        self.addCameraVerticalLayout.addWidget(self.addCameraLabel)
+        self.formLayout.setWidget(0, QFormLayout.ItemRole.FieldRole, self.addCameraLabel)
 
         self.scrollArea = QScrollArea(self.addCamera)
         self.scrollArea.setObjectName(u"scrollArea")
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 823, 1288))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, -834, 823, 1292))
         self.verticalLayout_9 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
+        self.verticalLayout_9.setContentsMargins(-1, 9, -1, -1)
         self.addCameraFormLayout = QFormLayout()
         self.addCameraFormLayout.setObjectName(u"addCameraFormLayout")
         self.addCameraCodeLabel = QLabel(self.scrollAreaWidgetContents)
@@ -660,6 +689,21 @@ class Ui_MainWindow(object):
 
         self.addCameraImageUploadButton = QPushButton(self.imageGroupBox)
         self.addCameraImageUploadButton.setObjectName(u"addCameraImageUploadButton")
+        self.addCameraImageUploadButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.addCameraImageUploadButton.setStyleSheet(u"QPushButton {\n"
+"    background-color: #2d89ef;\n"
+"    color: white;\n"
+"    border-radius: 6px;\n"
+"    padding: 6px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: #1b5fbf;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color: #144a99;\n"
+"}")
 
         self.gridLayout_10.addWidget(self.addCameraImageUploadButton, 0, 2, 1, 1)
 
@@ -678,10 +722,10 @@ class Ui_MainWindow(object):
 
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
-        self.addCameraVerticalLayout.addWidget(self.scrollArea)
+        self.formLayout.setWidget(1, QFormLayout.ItemRole.SpanningRole, self.scrollArea)
 
 
-        self.verticalLayout_4.addLayout(self.addCameraVerticalLayout)
+        self.verticalLayout_4.addLayout(self.formLayout)
 
         self.stackedWidget.addWidget(self.addCamera)
         self.about = QWidget()
@@ -714,6 +758,7 @@ class Ui_MainWindow(object):
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
         self.menubar.setGeometry(QRect(0, 0, 877, 24))
+        self.menubar.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.mainMenu = QMenu(self.menubar)
         self.mainMenu.setObjectName(u"mainMenu")
         self.mainMenu.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
@@ -731,7 +776,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         self.stackedWidget.setCurrentIndex(0)
-        self.tabWidget.setCurrentIndex(3)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -770,6 +815,7 @@ class Ui_MainWindow(object):
         self.cameraControllButton.setText(QCoreApplication.translate("MainWindow", u"Upravljanje", None))
         self.cameraIDLabel.setText(QCoreApplication.translate("MainWindow", u"ID:", None))
         self.cameraCodeLabel.setText(QCoreApplication.translate("MainWindow", u"Kod:", None))
+        self.addCameraGoBackButton.setText(QCoreApplication.translate("MainWindow", u"Nazad", None))
         self.addCameraLabel.setText(QCoreApplication.translate("MainWindow", u"Dodavanje Kamere", None))
         self.addCameraCodeLabel.setText(QCoreApplication.translate("MainWindow", u"Kod", None))
         self.networkGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"1. Mreza i Infrastruktura", None))

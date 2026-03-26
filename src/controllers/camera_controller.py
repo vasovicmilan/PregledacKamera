@@ -12,6 +12,7 @@ from PySide6.QtGui import QColor, QFont
 from models.camera import Camera, CameraStatus
 from utils.image_viewer import set_image_responsive
 from utils.dialogs import show_info, show_error, show_warning, show_confirm
+from utils.logger import log_info, log_warning, log_error
 import config.settings as settings
 
 from datetime import date
@@ -68,6 +69,10 @@ class CameraController(QObject):
         self.ui.addCameraEndDateEdit.setDisplayFormat("dd.MM.yyyy")
         self.ui.addCameraEndDateEdit.setSpecialValueText(" ")   # prazan tekst
 
+        # 🖱️ Postavi kursor na ruku za datum pickere
+        self.ui.addCameraStartDateEdit.setCursor(Qt.PointingHandCursor)
+        self.ui.addCameraEndDateEdit.setCursor(Qt.PointingHandCursor)
+
         # 🔥 Dinamičko omogućavanje krajnjeg datuma u zavisnosti od statusa
         self.ui.addCameraActiveRadioButton.toggled.connect(self._update_end_date_state)
         self.ui.addCameraInactiveButton.toggled.connect(self._update_end_date_state)
@@ -75,6 +80,33 @@ class CameraController(QObject):
 
         # 🔥 Postavi početno stanje: aktivna kamera, krajnji datum onemogućen
         self.reset_add_form()
+
+        # ========== NOVI VIZUELNI DODACI ==========
+
+        # 🖍️ Veći i podebljani font za ID i kod
+        bold_font = QFont()
+        bold_font.setPointSize(14)
+        bold_font.setBold(True)
+        self.ui.cameraIDLabel.setFont(bold_font)
+        self.ui.cameraCodeLabel.setFont(bold_font)
+
+        # 🎨 Naizmenične boje redova u tabeli i kursor na zaglavlju
+        self.ui.cameraTable.setAlternatingRowColors(True)
+        self.ui.cameraTable.setStyleSheet("""
+            QTableWidget {
+                alternate-background-color: #f2f2f2;
+                selection-background-color: #cce5ff;
+            }
+            QHeaderView::section {
+                background-color: #e0e0e0;
+                padding: 4px;
+                border: 1px solid #c0c0c0;
+                font-weight: bold;
+            }
+        """)
+
+        # Postavi kursor na zaglavlje
+        header.setCursor(Qt.PointingHandCursor)
 
     # 🔥 EVENT FILTER → automatski resize slike
     def eventFilter(self, obj, event):
@@ -90,14 +122,14 @@ class CameraController(QObject):
 
     # 🔥 Dinamičko omogućavanje/onemogućavanje polja za krajnji datum
     def _update_end_date_state(self):
-        # Proveri da li je izabran status ACTIVE
-        if self.ui.addCameraActiveRadioButton.isChecked():
-            # Aktivan: onemogući polje i obriši vrednost
+        # Proveri da li je izabran status DISMANTLED
+        if self.ui.addCameraDismantleRadioButton.isChecked():
+            # Samo za skinutu kameru omogući polje
+            self.ui.addCameraEndDateEdit.setEnabled(True)
+        else:
+            # Za aktivnu i neaktivnu onemogući polje i obriši vrednost
             self.ui.addCameraEndDateEdit.setEnabled(False)
             self.ui.addCameraEndDateEdit.setDateTime(QDateTime())
-        else:
-            # Neaktivan ili skinut: omogući polje
-            self.ui.addCameraEndDateEdit.setEnabled(True)
 
     # 🎨 STATUS BOJA
     def _get_status_color(self, status):
@@ -154,6 +186,7 @@ class CameraController(QObject):
         self.ui.cameraTable.itemSelectionChanged.connect(self.load_selected_camera)
 
         self.ui.addCameraImageUploadButton.clicked.connect(self.select_image)
+        self.ui.addCameraGoBackButton.clicked.connect(self.go_back_to_list)
 
     # 📊 LOAD
     def load_table(self):
@@ -181,12 +214,15 @@ class CameraController(QObject):
                 show_warning("Nema rezultata za pretragu.", parent=self.window)
                 self.ui.cameraTable.setRowCount(0)
                 self._clear_details()
+                log_info(f"Pretraga bez rezultata: term='{term}', status='{status}'")
                 return
 
             self._populate_table(cameras)
+            log_info(f"Pretraga uspešna: pronađeno {len(cameras)} kamera, term='{term}', status='{status}'")
 
         except Exception as e:
             show_error(str(e), parent=self.window)
+            log_error(f"Greška pri pretrazi: {e}")
 
     # 📋 TABLE
     def _populate_table(self, cameras):
@@ -257,7 +293,7 @@ class CameraController(QObject):
     def load_selected_camera(self):
         selected = self.ui.cameraTable.selectedItems()
         if not selected:
-            self._clear_details()   # <--- DODAJ OVU LINIJU
+            self._clear_details()
             return
 
         row = selected[0].row()
@@ -329,6 +365,11 @@ class CameraController(QObject):
                 table.selectRow(row)
                 return
 
+    # 🧹 GO BACK TO CAMERA LIST (RESET AND SWITCH)
+    def go_back_to_list(self):
+        self.reset_add_form()
+        self.ui.stackedWidget.setCurrentWidget(self.ui.cameraList)
+
     # ➕ SAVE
     def save_camera(self):
         try:
@@ -360,6 +401,7 @@ class CameraController(QObject):
 
         except Exception as e:
             show_error(str(e), parent=self.window)
+            log_error(f"Greška pri čuvanju kamere: {e}")
 
     # ✏️ EDIT
     def edit_camera(self):
@@ -367,6 +409,7 @@ class CameraController(QObject):
 
         if not selected:
             show_warning(settings.MSG_SELECT_CAMERA, parent=self.window)
+            log_warning("Pokušaj izmene kamere bez selektovanog reda.")
             return
 
         row = selected[0].row()
@@ -379,6 +422,7 @@ class CameraController(QObject):
 
         camera = self.service.get_by_id(camera_id)
         if not camera:
+            log_warning(f"Pokušaj izmene nepostojeće kamere ID {camera_id}")
             return
 
         self.edit_mode = True
@@ -414,6 +458,7 @@ class CameraController(QObject):
 
         if not selected:
             show_warning(settings.MSG_SELECT_CAMERA, parent=self.window)
+            log_warning("Pokušaj promene statusa bez selektovane kamere.")
             return
 
         row = selected[0].row()
@@ -438,6 +483,7 @@ class CameraController(QObject):
 
         if not selected:
             show_warning(settings.MSG_SELECT_CAMERA, parent=self.window)
+            log_warning("Pokušaj brisanja kamere bez selektovanog reda.")
             return
 
         row = selected[0].row()
@@ -488,9 +534,9 @@ class CameraController(QObject):
             if end_qdate.isValid():
                 self.ui.addCameraEndDateEdit.setDate(end_qdate)
             else:
-                self.ui.addCameraEndDateEdit.setDateTime(QDateTime())  # invalid datetime -> prazno
+                self.ui.addCameraEndDateEdit.setDateTime(QDateTime())
         else:
-            self.ui.addCameraEndDateEdit.setDateTime(QDateTime())  # invalid
+            self.ui.addCameraEndDateEdit.setDateTime(QDateTime())
 
         # ✅ Postavi status radio dugmad
         if camera.health_status == CameraStatus.ACTIVE:
@@ -522,8 +568,8 @@ class CameraController(QObject):
         # Odredi status
         status = self._get_status()
 
-        # End date: ako je status ACTIVE, uvek None
-        if status == CameraStatus.ACTIVE:
+        # End date: ako je status ACTIVE ili INACTIVE, uvek None; samo DISMANTLED sme imati end_date
+        if status in (CameraStatus.ACTIVE, CameraStatus.INACTIVE):
             end_date = None
         else:
             end_qdate = self.ui.addCameraEndDateEdit.date()

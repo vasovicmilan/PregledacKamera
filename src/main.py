@@ -22,7 +22,7 @@ from controllers.camera_controller import CameraController
 from controllers.navigation_controller import NavigationController
 
 # LOGGER
-from utils.logger import log_error
+from utils.logger import log_error, log_info
 
 # SETTINGS
 from config import settings
@@ -38,8 +38,15 @@ def global_exception_handler(exc_type, exc_value, exc_traceback):
     # 📁 log
     log_error(error_msg)
 
-    # 🪟 popup (centar ekrana)
-    show_error("Došlo je do neočekivane greške.\nProveri log fajl.")
+    # 🪟 popup – pokušaj da centrira na glavni prozor ako postoji
+    parent = None
+    app = QApplication.instance()
+    if app:
+        for widget in app.topLevelWidgets():
+            if isinstance(widget, QMainWindow):
+                parent = widget
+                break
+    show_error("Došlo je do neočekivane greške.\nProveri log fajl.", parent=parent)
 
 
 sys.excepthook = global_exception_handler
@@ -59,6 +66,10 @@ class MainWindow(QMainWindow):
         # 📦 LAYERS
         self.repository = CameraRepository(self.db)
         self.service = CameraService(self.repository)
+
+        # 📊 Logovanje pokretanja i broja kamera
+        camera_count = self.service.count()
+        log_info(f"Aplikacija pokrenuta. Broj kamera u bazi: {camera_count}")
 
         # 🎮 CONTROLLERS
         self.camera_controller = CameraController(self, self.ui, self.service)

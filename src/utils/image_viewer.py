@@ -1,6 +1,7 @@
 from PySide6.QtGui import QPixmap, QPixmapCache
 from PySide6.QtCore import Qt
 import os
+from utils.logger import log_warning, log_error
 
 
 def set_image_responsive(label, image_path, min_size=300, max_size=2000):
@@ -12,6 +13,8 @@ def set_image_responsive(label, image_path, min_size=300, max_size=2000):
     """
 
     if not image_path or not os.path.exists(image_path):
+        if image_path:
+            log_warning(f"Slika ne postoji: {image_path}")
         label.clear()
         label._original_pixmap = None
         return
@@ -21,6 +24,7 @@ def set_image_responsive(label, image_path, min_size=300, max_size=2000):
         pixmap = QPixmap(image_path)
 
         if pixmap.isNull():
+            log_warning(f"QPixmap ne može da učita sliku: {image_path}")
             label.clear()
             label._original_pixmap = None
             return
@@ -68,7 +72,8 @@ def set_image_responsive(label, image_path, min_size=300, max_size=2000):
         # 💾 cache final
         QPixmapCache.insert(cache_key, smooth_scaled)
 
-    except Exception:
+    except Exception as e:
+        log_error(f"Greška pri učitavanju slike {image_path}: {e}")
         label.clear()
         label._original_pixmap = None
 

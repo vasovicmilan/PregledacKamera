@@ -75,6 +75,7 @@ STATUS_OPTIONS = [
 # =========================
 TITLE_SUCCESS = "Uspeh"
 TITLE_ERROR = "Greška"
+TITLE_WARNING = "Upozorenje"
 TITLE_CONFIRM = "Potvrda"
 
 MSG_CAMERA_ADDED = "Kamera dodata!"

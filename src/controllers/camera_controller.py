@@ -162,7 +162,8 @@ class CameraController(QObject):
         base = label.text()
         if ":" in base:
             base = base.split(":")[0]
-        label.setText(f"{base}: {value or ''}")
+        # Make the value bold and slightly larger (e.g., 12pt)
+        label.setText(f"{base}: <b><span style='font-size: 16pt'>{value or ''}</span></b>")
 
     # 🔧 MODE
     def _set_mode(self, edit=False):
@@ -464,17 +465,24 @@ class CameraController(QObject):
         row = selected[0].row()
         camera_id = int(self.ui.cameraTable.item(row, 0).text())
 
-        status, ok = QInputDialog.getItem(
+        # Display names in Serbian, mapped to actual status values
+        status_display = ["Aktivna", "Neaktivna", "Skinuta"]
+        actual_statuses = settings.STATUS_OPTIONS  # ["active", "inactive", "dismantled"]
+
+        selected_display, ok = QInputDialog.getItem(
             self.window,
             "Promena statusa",
             "Izaberite status:",
-            settings.STATUS_OPTIONS,
+            status_display,
             0,
             False
         )
 
         if ok:
-            self.service.update_status(camera_id, status)
+            # Find the index of the selected display name and get the actual status
+            index = status_display.index(selected_display)
+            actual_status = actual_statuses[index]
+            self.service.update_status(camera_id, actual_status)
             self.load_table()
 
     # ❌ DELETE

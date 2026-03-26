@@ -137,6 +137,7 @@ class Ui_MainWindow(object):
         self.cameraTypeLabel.setObjectName(u"cameraTypeLabel")
         self.cameraTypeLabel.setFrameShape(QFrame.Box)
         self.cameraTypeLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+        self.cameraTypeLabel.setWordWrap(True)
 
         self.identificationGridLayout.addWidget(self.cameraTypeLabel, 1, 1, 1, 1)
 
@@ -144,6 +145,7 @@ class Ui_MainWindow(object):
         self.cameraLocationLabel.setObjectName(u"cameraLocationLabel")
         self.cameraLocationLabel.setFrameShape(QFrame.Box)
         self.cameraLocationLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+        self.cameraLocationLabel.setWordWrap(True)
 
         self.identificationGridLayout.addWidget(self.cameraLocationLabel, 1, 0, 1, 1)
 
@@ -151,6 +153,7 @@ class Ui_MainWindow(object):
         self.cameraPurposeLabel.setObjectName(u"cameraPurposeLabel")
         self.cameraPurposeLabel.setFrameShape(QFrame.Box)
         self.cameraPurposeLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+        self.cameraPurposeLabel.setWordWrap(True)
 
         self.identificationGridLayout.addWidget(self.cameraPurposeLabel, 2, 0, 1, 1)
 
@@ -158,6 +161,7 @@ class Ui_MainWindow(object):
         self.cameraFunctioLabel.setObjectName(u"cameraFunctioLabel")
         self.cameraFunctioLabel.setFrameShape(QFrame.Box)
         self.cameraFunctioLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+        self.cameraFunctioLabel.setWordWrap(True)
 
         self.identificationGridLayout.addWidget(self.cameraFunctioLabel, 2, 1, 1, 1)
 
@@ -165,6 +169,7 @@ class Ui_MainWindow(object):
         self.cameraCoverageLabel.setObjectName(u"cameraCoverageLabel")
         self.cameraCoverageLabel.setFrameShape(QFrame.Box)
         self.cameraCoverageLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+        self.cameraCoverageLabel.setWordWrap(True)
 
         self.identificationGridLayout.addWidget(self.cameraCoverageLabel, 4, 0, 1, 2)
 
@@ -182,6 +187,7 @@ class Ui_MainWindow(object):
         self.cameraModelLabel.setObjectName(u"cameraModelLabel")
         self.cameraModelLabel.setFrameShape(QFrame.Box)
         self.cameraModelLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+        self.cameraModelLabel.setWordWrap(True)
 
         self.infrastructureGridLayout.addWidget(self.cameraModelLabel, 2, 0, 1, 1)
 
@@ -189,6 +195,7 @@ class Ui_MainWindow(object):
         self.cameraServerLabel.setObjectName(u"cameraServerLabel")
         self.cameraServerLabel.setFrameShape(QFrame.Box)
         self.cameraServerLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+        self.cameraServerLabel.setWordWrap(True)
 
         self.infrastructureGridLayout.addWidget(self.cameraServerLabel, 1, 0, 1, 1)
 
@@ -196,6 +203,7 @@ class Ui_MainWindow(object):
         self.cameraIPaddressLabel.setObjectName(u"cameraIPaddressLabel")
         self.cameraIPaddressLabel.setFrameShape(QFrame.Box)
         self.cameraIPaddressLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+        self.cameraIPaddressLabel.setWordWrap(True)
 
         self.infrastructureGridLayout.addWidget(self.cameraIPaddressLabel, 0, 0, 1, 2)
 
@@ -203,6 +211,7 @@ class Ui_MainWindow(object):
         self.cameraRackLabel.setObjectName(u"cameraRackLabel")
         self.cameraRackLabel.setFrameShape(QFrame.Box)
         self.cameraRackLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+        self.cameraRackLabel.setWordWrap(True)
 
         self.infrastructureGridLayout.addWidget(self.cameraRackLabel, 1, 1, 1, 1)
 
@@ -210,6 +219,7 @@ class Ui_MainWindow(object):
         self.cameraRetentionLabel.setObjectName(u"cameraRetentionLabel")
         self.cameraRetentionLabel.setFrameShape(QFrame.Box)
         self.cameraRetentionLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+        self.cameraRetentionLabel.setWordWrap(True)
 
         self.infrastructureGridLayout.addWidget(self.cameraRetentionLabel, 2, 1, 1, 1)
 
@@ -227,6 +237,7 @@ class Ui_MainWindow(object):
         self.cameraStartDateLabel.setObjectName(u"cameraStartDateLabel")
         self.cameraStartDateLabel.setFrameShape(QFrame.Box)
         self.cameraStartDateLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+        self.cameraStartDateLabel.setWordWrap(True)
 
         self.statusGridLayout.addWidget(self.cameraStartDateLabel, 1, 0, 1, 1)
 
@@ -234,6 +245,7 @@ class Ui_MainWindow(object):
         self.cameraEndDateLabel.setObjectName(u"cameraEndDateLabel")
         self.cameraEndDateLabel.setFrameShape(QFrame.Box)
         self.cameraEndDateLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+        self.cameraEndDateLabel.setWordWrap(True)
 
         self.statusGridLayout.addWidget(self.cameraEndDateLabel, 1, 1, 1, 1)
 
@@ -241,6 +253,7 @@ class Ui_MainWindow(object):
         self.cameraStatusLabel.setObjectName(u"cameraStatusLabel")
         self.cameraStatusLabel.setFrameShape(QFrame.Box)
         self.cameraStatusLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+        self.cameraStatusLabel.setWordWrap(True)
 
         self.statusGridLayout.addWidget(self.cameraStatusLabel, 0, 0, 1, 2)
 
@@ -275,6 +288,7 @@ class Ui_MainWindow(object):
         self.cameraNoteLabel.setObjectName(u"cameraNoteLabel")
         self.cameraNoteLabel.setFrameShape(QFrame.Box)
         self.cameraNoteLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+        self.cameraNoteLabel.setWordWrap(True)
 
         self.actionGridLayout.addWidget(self.cameraNoteLabel, 0, 0, 1, 1)
 
@@ -282,6 +296,7 @@ class Ui_MainWindow(object):
         self.cameraActionLabel.setObjectName(u"cameraActionLabel")
         self.cameraActionLabel.setFrameShape(QFrame.Box)
         self.cameraActionLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+        self.cameraActionLabel.setWordWrap(True)
 
         self.actionGridLayout.addWidget(self.cameraActionLabel, 1, 0, 1, 1)
 

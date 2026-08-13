@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# PyInstaller
+**/build/
+**/dist/
+*.spec.bak
+
+# Logs
+*.log
+
+# Database temporary files
+*.db-journal
+
+# OS files
+.DS_Store
+Thumbs.db
